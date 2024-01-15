@@ -1,76 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ISP Pricing</title>
+  <style>
     body {
-        font-family: 'Arial', sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #faeedd;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
     }
 
-    ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        background-color: #138d90;
-        overflow: hidden;
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
     }
 
-    li {
-        float: left;
+    section {
+      display: flex;
+      justify-content: space-around;
+      padding: 2em;
     }
 
-    li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 1.5em;
+    .pricing-option {
+      text-align: center;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 1.5em;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 30%;
+      cursor: pointer;
+      text-decoration: none; /* Remove underline */
+      color: #333; /* Text color for plan features */
     }
 
-    li a:hover {
-        background-color: #505160;
+    h2 {
+      color: #333;
     }
 
-    h1 {
-        color: #333;
-        text-align: center;
-        margin-top: 250px;
-        font-size: 2.5em;
+    .price {
+      font-size: 1.5em;
+      color: #27ae60;
     }
 
-    form {
-        text-align: center;
-        margin-top: 20px;
+    .features {
+      margin-top: 1em;
     }
 
-    button {
-        padding: 10px;
-        background-color: #138d90;
-        color: white;
-        border: none;
-        cursor: pointer;
-        font-size: 1.5em;
+    .click-me {
+      color: #3498db;
+      font-size: 0.8em;
+      margin-top: 0.5em;
     }
 
-    button:hover {
-        background-color: #333;
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
     }
-</style>
+  </style>
 </head>
 <body>
-    <ul>
-        <li><a href="http://127.0.0.1:5000">Main</a></li>
-    </ul>
 
-    <h1>{{ message }}</h1>
+  <header>
+    <h1>ISP Pricing Plans</h1>
+  </header>
 
-    <form action="/survey" method="get">
-        <button type="submit">Press me</button>
-    </form>
+  <section>
+    <a href="#unlimited-speed-traffic" class="pricing-option">
+      <h2>Unlimited Speed & Traffic</h2>
+      <div class="price">$29.99/month</div>
+      <div class="features">
+        <p>Unlimited Speed</p>
+        <p>Unlimited Traffic</p>
+      </div>
+      <div class="click-me">Click me</div>
+    </a>
+
+    <a href="#unlimited-traffic-speed" class="pricing-option">
+      <h2>Unlimited Traffic & Limited Speed</h2>
+      <div class="price">$19.99/month</div>
+      <div class="features">
+        <p>Limited Speed</p>
+        <p>Unlimited Traffic</p>
+      </div>
+      <div class="click-me">Click me</div>
+    </a>
+
+    <a href="#unlimited-speed-traffic" class="pricing-option">
+      <h2>Unlimited Speed & Limited Traffic</h2>
+      <div class="price">$24.99/month</div>
+      <div class="features">
+        <p>Unlimited Speed</p>
+        <p>Limited Traffic</p>
+      </div>
+      <div class="click-me">Click me</div>
+    </a>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Random Bullshit INC. ISP. All rights reserved.</p>
+  </footer>
+
 </body>
 </html>
