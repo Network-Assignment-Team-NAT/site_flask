@@ -56,26 +56,13 @@
 
   <section>
     <p>Click the button below to download the configuration file:</p>
-    <button onclick="downloadConfig()">Download Config</button>
+      <form action="/download" method="get">
+        <button type="submit">Download Config</button>
+    </form>
   </section>
 
   <footer>
-    <p>&copy; 2024 Your Company Name. All rights reserved.</p>
+    <p>&copy; 2024 NAT. All rights reserved.</p>
   </footer>
-
-  <script>
-    function downloadConfig() {
-      // Path to your actual .conf file
-      const filePath = '../configs/user1.ovpn';
-
-      const a = document.createElement('a');
-      a.href = filePath;
-      a.download = 'example.conf';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  </script>
-
 </body>
 </html>

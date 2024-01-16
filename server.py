@@ -1,26 +1,59 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, send_file
+import os
+
+
+def list_files_in_directory(directory, list_of_files):
+    for filename in os.listdir(directory):
+        if os.path.isfile(os.path.join(directory, filename)):
+            list_of_files.append(f'{directory}\\{filename}')
 
 
 app = Flask(__name__)
 
+plan = 'empty'
+
 
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template('hello.html',
-                           message=f"Hello, World! It is an awesome site on Flask, that you can reach from our ISP.")
+    return render_template('hello.html')
 
 
-@app.route('/survey', methods=['GET'])
-def survey():
-    return render_template('survey.html')
+@app.route('/un-speed-traffic', methods=['GET'])
+def download_page_u():
+    global plan
+    plan = 'uu'
+    return render_template('download.html')
 
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    name = request.form['name']
-    age = request.form['age']
-    country = request.form['country']
-    return render_template('submit.html', message=f"Hi, {name}! I dare say you are {age} years old and from {country}!")  # use new html file, like we use in hello function. View all variables from this request
+@app.route('/lim-speed-un-trafic', methods=['GET'])
+def download_page_lu():
+    global plan
+    plan = 'lu'
+    return render_template('download.html')
+
+
+@app.route('/un-speed-lim-traffic', methods=['GET'])
+def download_page_ul():
+    plan = 'ul'
+    return render_template('download.html')
+
+
+current_file_index = 0
+
+
+@app.route('/download')
+def download_file():
+    global current_file_index
+
+    file_list = []
+    list_files_in_directory(f'configs/{plan}', file_list)
+
+    if current_file_index < len(file_list):
+        file_path = file_list[current_file_index]
+        current_file_index += 1
+        return send_file(file_path, as_attachment=True)
+    else:
+        return render_template('error.html')
 
 
 if __name__ == '__main__':
