@@ -21,20 +21,21 @@ def hello():
 @app.route('/un-speed-traffic', methods=['GET'])
 def download_page_u():
     global plan
-    plan = 'uu'
+    plan = 'un-speed-traffic'
     return render_template('download.html')
 
 
-@app.route('/lim-speed-un-trafic', methods=['GET'])
+@app.route('/lim-speed-un-traffic', methods=['GET'])
 def download_page_lu():
     global plan
-    plan = 'lu'
+    plan = 'lim-speed-un-traffic'
     return render_template('download.html')
 
 
 @app.route('/un-speed-lim-traffic', methods=['GET'])
 def download_page_ul():
-    plan = 'ul'
+    global plan
+    plan = 'un-speed-lim-traffic'
     return render_template('download.html')
 
 
