@@ -21,33 +21,34 @@ current_file_indices = {
 
 @app.route('/', methods=['GET'])
 def hello():
-    return render_template('hello.html')
+    return render_template('main.html')
 
 
 @app.route('/un-speed-traffic', methods=['GET'])
 def download_page_u():
     global plan
     plan = 'un-speed-traffic'
-    return render_template('download.html')
+    return render_template('survey.html')
 
 
 @app.route('/lim-speed-un-traffic', methods=['GET'])
 def download_page_lu():
     global plan
     plan = 'lim-speed-un-traffic'
-    return render_template('download.html')
+    return render_template('survey.html')
 
 
 @app.route('/un-speed-lim-traffic', methods=['GET'])
 def download_page_ul():
     global plan
     plan = 'un-speed-lim-traffic'
+    return render_template('survey.html')
+
+
+@app.route('/submit', methods=['POST'])
+def submit():
     return render_template('download.html')
 
-
-current_file_index_un_speed_traffic = 0
-current_file_index_lim_speed_un_traffic = 0
-current_file_index_un_speed_lim_traffic = 0
 
 @app.route('/download')
 def download_file():
