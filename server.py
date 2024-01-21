@@ -12,6 +12,12 @@ app = Flask(__name__)
 
 plan = 'empty'
 
+current_file_indices = {
+    'un-speed-traffic': 0,
+    'lim-speed-un-traffic': 0,
+    'un-speed-lim-traffic': 0
+}
+
 
 @app.route('/', methods=['GET'])
 def hello():
@@ -39,19 +45,30 @@ def download_page_ul():
     return render_template('download.html')
 
 
-current_file_index = 0
-
+current_file_index_un_speed_traffic = 0
+current_file_index_lim_speed_un_traffic = 0
+current_file_index_un_speed_lim_traffic = 0
 
 @app.route('/download')
 def download_file():
-    global current_file_index
+    global plan
+    global current_file_indices
 
-    file_list = []
-    list_files_in_directory(f'configs/{plan}', file_list)
+    file_lists = {
+        'un-speed-traffic': [],
+        'lim-speed-un-traffic': [],
+        'un-speed-lim-traffic': []
+    }
 
-    if current_file_index < len(file_list):
-        file_path = file_list[current_file_index]
-        current_file_index += 1
+    list_files_in_directory(f'configs/{plan}', file_lists['un-speed-traffic'])
+    list_files_in_directory(f'configs/{plan}', file_lists['lim-speed-un-traffic'])
+    list_files_in_directory(f'configs/{plan}', file_lists['un-speed-lim-traffic'])
+
+    current_index = current_file_indices.get(plan, 0)
+
+    if current_index < len(file_lists[plan]):
+        file_path = file_lists[plan][current_index]
+        current_file_indices[plan] += 1
         return send_file(file_path, as_attachment=True)
     else:
         return render_template('error.html')
