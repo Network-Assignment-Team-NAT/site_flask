@@ -7,8 +7,6 @@ Instruction:
 
 - Change config files in directories in directory /configs according to the plans
 
-Important! Do not add something in the directory /empty, it should be empty. Do not delete it.
-
 - Run server.py 
 
 Info:
