@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!-- Add this script tag to your HTML template -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -30,9 +32,10 @@
     }
 
     section {
-      margin: 2em;
-      font-size: 16px;
+      margin: 7.5em;
+        font-size: 1.5em;
     }
+
 
     button {
       background-color: #3498db;
@@ -57,6 +60,7 @@
       width: 100%;
       bottom: 0;
     }
+
   </style>
 </head>
 <body>
@@ -67,11 +71,38 @@
   </header>
 
   <section>
-    <p>Click the button below to download the configuration file:</p>
-      <form action="/download" method="get">
-        <button type="submit">Download Config</button>
-    </form>
+    <h1>Downloading...</h1>
   </section>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "/download", true);
+        xhr.responseType = "blob";
+
+        xhr.onload = function() {
+            var blob = xhr.response;
+            var contentDisposition = xhr.getResponseHeader("Content-Disposition");
+            var fileName = xhr.getResponseHeader("X-File-Name");  // Retrieve the filename
+
+            // Check if the Content-Disposition header is present
+            if (contentDisposition && contentDisposition.includes("attachment")) {
+                // Save the file using FileSaver.js
+                saveAs(blob, fileName);
+
+                // Redirect to the new page after a short delay
+                setTimeout(function() {
+                    window.location.href = "/new_page_after_download";
+                }, 1000); // Adjust the delay as needed
+            } else {
+                // Handle errors or non-attachment responses
+                console.error("Error downloading file.");
+            }
+        };
+
+        xhr.send();
+    });
+  </script>
 
   <footer>
     <p>&copy; 2024 NAT. All rights reserved.</p>

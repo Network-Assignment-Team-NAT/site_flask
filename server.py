@@ -1,4 +1,4 @@
-from flask import Flask, render_template, send_file
+from flask import Flask, render_template, send_file, make_response
 import os
 
 
@@ -70,9 +70,19 @@ def download_file():
     if current_index < len(file_lists[plan]):
         file_path = file_lists[plan][current_index]
         current_file_indices[plan] += 1
-        return send_file(file_path, as_attachment=True)
+
+        response = make_response(send_file(file_path, as_attachment=True))
+        response.headers["X-File-Name"] = os.path.basename(file_path)
+        response.headers["X-SendFile"] = file_path
+
+        return response
     else:
         return render_template('error.html')
+
+
+@app.route('/new_page_after_download')
+def new_page_after_download():
+    return render_template('thanks.html')
 
 
 if __name__ == '__main__':
