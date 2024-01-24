@@ -7,7 +7,9 @@ Instruction:
 
 - Change config files in directories in directory /configs according to the plans
 
-- Run server.py 
+- docker build -t site_flask .
+
+- docker run -p 5000:5000 site_flask
 
 Info:
 
