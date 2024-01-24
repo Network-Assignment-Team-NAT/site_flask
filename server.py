@@ -5,7 +5,7 @@ import os
 def list_files_in_directory(directory, list_of_files):
     for filename in os.listdir(directory):
         if os.path.isfile(os.path.join(directory, filename)):
-            list_of_files.append(f'{directory}\\{filename}')
+            list_of_files.append(f'{directory}/{filename}')
 
 
 app = Flask(__name__)
@@ -86,4 +86,4 @@ def new_page_after_download():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
